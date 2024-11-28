@@ -11,9 +11,16 @@ const userRoutes = require("./routes/users");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+const corsOptions = {
+  origin: 'http://localhost:5173', // Allow requests from your frontend origin
+  methods: 'GET,POST,PUT,DELETE',  // Allow the required HTTP methods
+  credentials: true,               // Allow cookies to be sent with requests
+};
+
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.use(session({
@@ -22,8 +29,8 @@ app.use(session({
   saveUninitialized: true,  
   cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 24 * 60 * 60  // Session expiry (24 hour)
+      domain: 'localhost',  // Ensure the cookie is set for localhost
+      maxAge: 24 * 60 * 60  // Session expiry (24 hour),
   }
 }));
 

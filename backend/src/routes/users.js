@@ -121,6 +121,15 @@ router.post('/logout', (req, res) => {
     });
 });
 
+router.get('/check-session', (req, res) => {
+    console.log(req.session.userId);
+    if (req.session.userId) {
+        return res.json({ loggedIn: true });
+    } else {
+        return res.json({ loggedIn: false });
+    }
+});
+
 
 // Route to get user profile (requires authentication)
 // router.get('/profile', authenticateToken, async (req, res) => {
