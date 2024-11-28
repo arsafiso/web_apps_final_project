@@ -34,4 +34,21 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get movies by titles
+router.post('/titles', async (req, res) => {
+    try {
+        const titles = req.body.titles; // Expecting a list of movie titles in the request body
+        if (!titles || !Array.isArray(titles)) {
+            return res.status(400).json({ error: 'Please provide a list of titles.' });
+        }
+
+        // Find movies by the list of titles
+        const movies = await Movie.find({ title: { $in: titles } });
+
+        res.status(200).json(movies);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch movies by titles.', details: err.message });
+    }
+});
+
 module.exports = router;
