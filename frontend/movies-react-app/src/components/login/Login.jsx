@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { UserContext } from '../User/UserContext';
 
 const Login = () => {
+    const { loginUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -32,7 +34,8 @@ const Login = () => {
             }
 
             setMessage(data.message);
-            setError(null);  // Clear any previous error
+            setError(null);
+            loginUser({ name: data.name, email: formData.email });  // Clear any previous error
         } catch (err) {
             setMessage('');
             setError(err.message || 'Login failed');

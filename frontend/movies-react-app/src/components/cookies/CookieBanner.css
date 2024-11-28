@@ -1,0 +1,24 @@
+.cookie-banner {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .cookie-actions button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cookie-actions button:hover {
+    background-color: #45a049;
+  }
+  
