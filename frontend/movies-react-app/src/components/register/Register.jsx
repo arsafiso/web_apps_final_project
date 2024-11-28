@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { UserContext } from '../User/UserContext';
 
 const Register = () => {
-    const { loginUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -37,7 +35,6 @@ const Register = () => {
 
             setMessage(data.message);
             setError(null);  // Clear any previous error
-            loginUser({ name: `${formData.firstName} ${formData.lastName}`, email: formData.email });
         } catch (err) {
             setMessage('');
             setError(err.message || 'Registration failed');

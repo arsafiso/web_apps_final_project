@@ -10,7 +10,6 @@ const Movies = () => {
       try {
         const res = await fetch('http://localhost:3000/api/movies');
         const data = await res.json();
-        console.log('Fetched movies:', data);
         setMovies(data);
       } catch (err) {
         console.error('Error fetching movies:', err);
