@@ -1,37 +1,19 @@
-import React, { useEffect, useState } from 'react';
-
-const User = () => {
-  const [user, setUser] = useState(null);
-  const [cookiePreferences, setCookiePreferences] = useState(null);
-
-  useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser)); 
-    }
-
-    const cookieConsent = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('cookieConsent='))
-      ?.split('=')[1];
-    setCookiePreferences(cookieConsent); 
-  }, []);
+import React, { useContext } from 'react';
+import UserContext from './UserContext'; 
+const UserComponent = () => {
+  const { user, logoutUser } = useContext(UserContext); 
+  
+  if (!user) {
+    return <p>You are not logged in. Please sign in to like movies.</p>;
+  }
 
   return (
-    <div className="user-info">
-      {user ? (
-        <p>Welcome, {user.name}!</p>
-      ) : (
-        <p>Welcome, Guest!</p>
-      )}
-      {cookiePreferences && (
-        <div className="preferences">
-          <p>Cookie Preferences:</p>
-          <pre>{JSON.stringify(cookiePreferences, null, 2)}</pre>
-        </div>
-      )}
+    <div>
+      <h2>Welcome, {user.name}!</h2>
+      <p>Email: {user.email}</p>
+      <button onClick={logoutUser}>Logout</button>
     </div>
   );
 };
 
-export default User;
+export default UserComponent;

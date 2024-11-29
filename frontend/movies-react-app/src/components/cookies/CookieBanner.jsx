@@ -1,65 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import UserContext from '../../components/user/UserContext'; 
 
 const CookieBanner = () => {
-  const [user, setUser] = useState(null);
-  const [cookiePreferences, setCookiePreferences] = useState(null);
-  const [isBannerVisible, setBannerVisible] = useState(true);
+  const { cookiePreferences, updateCookiePreferences } = useContext(UserContext); 
+  const [showBanner, setShowBanner] = useState(!cookiePreferences); 
 
-  useEffect(() => {
-    try {
-      const savedUser = localStorage.getItem('user');
-      if (savedUser) {
-        setUser(JSON.parse(savedUser));
-      }
-
-      // Retrieve cookie preferences from cookies
-      const cookieConsent = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('cookieConsent='))
-        ?.split('=')[1];
-      setCookiePreferences(cookieConsent); // Set cookie preferences state
-    } catch (error) {
-      console.error("Error loading user or cookie preferences:", error);
-    }
-  }, []);
-
-  const handleAccept = () => {
-    try {
-      setCookiePreferences('accepted');
-      document.cookie = `cookieConsent=accepted; max-age=31536000`; 
-      setBannerVisible(false); 
-    } catch (error) {
-      console.error("Error handling cookie consent acceptance:", error);
-    }
+  const handleAcceptCookies = () => {
+    updateCookiePreferences('accepted'); 
+    setShowBanner(false); 
   };
 
-  const handleDecline = () => {
-    try {
-      setCookiePreferences('declined');
-      document.cookie = `cookieConsent=declined; max-age=31536000`; 
-      setBannerVisible(false); 
-    } catch (error) {
-      console.error("Error handling cookie consent decline:", error);
-    }
+  const handleDeclineCookies = () => {
+    updateCookiePreferences('declined'); 
+    setShowBanner(false); 
   };
 
-  if (!isBannerVisible) return null;
-  console.log ({cookiePreferences})
+  if (!showBanner) return null; 
 
   return (
     <div className="cookie-banner">
-      <p>We use cookies to improve your experience on our site.</p>
-      <div className="cookie-actions">
-        <button onClick={handleAccept}>Accept</button>
-        <button onClick={handleDecline}>Decline</button>
-      </div>
-      {user && <p>Welcome, {user.name}!</p>} {/* Display user name if available */}
-      {cookiePreferences && (
-        
-        <div className="preferences">
-          {/* <p>Cookie Preferences: {cookiePreferences}</p> */}
-        </div>
-      )}
+      <p>We use cookies to improve your experience. Do you accept our cookie policy?</p>
+      <button onClick={handleAcceptCookies}>Accept</button>
+      <button onClick={handleDeclineCookies}>Decline</button>
     </div>
   );
 };
