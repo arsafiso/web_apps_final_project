@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movies</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix UI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">NETFLIX</div>
+        <div class="user-section">
+            <button class="register-btn">Register</button>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="category-title">Action</h2>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/200x300" alt="The Lord of the Rings">
+                <h3>The Lord of the Rings: The Two Towers</h3>
+                <div class="movie-info">
+                    <span class="rating">Rating: 8.7</span>
+                    <span class="duration">Duration: 2h 59m</span>
+                </div>
+                <button class="favorite-btn">Add to Favorites</button>
+            </div>
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/200x300" alt="The Matrix">
+                <h3>The Matrix</h3>
+                <div class="movie-info">
+                    <span class="rating">Rating: 8.7</span>
+                    <span class="duration">Duration: 2h 16m</span>
+                </div>
+                <button class="favorite-btn">Add to Favorites</button>
+            </div>
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/200x300" alt="Star Wars">
+                <h3>Star Wars</h3>
+                <div class="movie-info">
+                    <span class="rating">Rating: 8.8</span>
+                    <span class="duration">Duration: 2h 01m</span>
+                </div>
+                <button class="favorite-btn">Add to Favorites</button>
+            </div>
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/200x300" alt="Inception">
+                <h3>Inception</h3>
+                <div class="movie-info">
+                    <span class="rating">Rating: 8.8</span>
+                    <span class="duration">Duration: 2h 28m</span>
+                </div>
+                <button class="favorite-btn">Add to Favorites</button>
+            </div>
+        </div>
+    </main>
+</body>
 </html>
