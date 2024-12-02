@@ -26,10 +26,10 @@ const Movies = () => {
     try {
       const res = await fetch('http://localhost:3000/api/users/favorites', { 
         method: 'GET', 
-        credentials: 'include' // Send cookies/session data
+        credentials: 'include' 
       });
       const data = await res.json();
-      setFavorites(data); // Set user's favorite movies
+      setFavorites(data); 
     } catch (err) {
       console.error('Error fetching favorites:', err);
     }
@@ -45,7 +45,7 @@ const addToFavorites = async (movieId) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ movieId }),
-      credentials: 'include', // Send cookies/session data
+      credentials: 'include', 
     });
     const data = await res.json();
     if (res.status === 200) {
@@ -81,7 +81,7 @@ const formatDuration = (seconds) => {
     return <div><h1>Movies</h1><p>No movies available</p></div>;
   }
 
-  // Organize and sort movies by genre, getting top 10 by rating
+  
   const moviesByGenre = movies.reduce((acc, movie) => {
     movie.info.genres?.forEach((genre) => {
       if (!acc[genre]) acc[genre] = [];
@@ -98,7 +98,7 @@ const formatDuration = (seconds) => {
 
   return (
     <div>
-      <h1>Movies by Genre</h1>
+      {/* <h1>Movies by Genre</h1> */}
       <div className="movies-container">
         {Object.keys(moviesByGenre).map((genre) => (
           <div key={genre} className="genre-section">
@@ -123,7 +123,7 @@ const formatDuration = (seconds) => {
                     <p><strong>Duration:</strong> {formatDuration(movie.info.running_time_secs) || 'N/A'}</p>
                     <button 
                       onClick={() => addToFavorites(movie._id)}
-                      disabled={isFavorite(movie._id)} // Disable if already added
+                      disabled={isFavorite(movie._id)} 
                       className="add-to-favorites-btn"
                     >
                       {isFavorite(movie._id) ? 'Added to Favorites' : 'Add to Favorites'}
@@ -136,7 +136,7 @@ const formatDuration = (seconds) => {
         ))}
       </div>
 
-      {/* Display Favorites */}
+     
       <h1>Your Favorites</h1>
       <div className="movies-container">
         {favorites.length === 0 ? (

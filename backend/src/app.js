@@ -13,12 +13,12 @@ const PORT = process.env.PORT || 3000;
 
 
 const corsOptions = {
-  origin: 'http://localhost:5173', // Allow requests from your frontend origin
-  methods: 'GET,POST,PUT,DELETE',  // Allow the required HTTP methods
-  credentials: true,               // Allow cookies to be sent with requests
+  origin: 'http://localhost:5173', 
+  methods: 'GET,POST,PUT,DELETE',  
+  credentials: true,               
 };
 
-// Middleware
+
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
@@ -29,19 +29,19 @@ app.use(session({
   saveUninitialized: true,  
   cookie: {
       httpOnly: true,
-      domain: 'localhost',  // Ensure the cookie is set for localhost
-      maxAge: 24 * 60 * 60  // Session expiry (24 hour),
+      domain: 'localhost',  
+      maxAge: 24 * 60 * 60  
   }
 }));
 
-// Connect to MongoDB
+
 connectDB();
 
-// Routes
+
 app.use("/api/movies", movieRoutes);
 app.use("/api/users", userRoutes);
 
-// Serve React build (frontend)
+
 const path = require("path");
 app.use(
   express.static(path.join(__dirname, "../../frontend/movies-react-app/dist"))
@@ -52,7 +52,7 @@ app.get("*", (req, res) => {
   );
 });
 
-// Start server
+
 app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );

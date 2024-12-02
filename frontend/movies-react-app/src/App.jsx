@@ -12,7 +12,7 @@ function App() {
 
   return (
     <UserProvider>
-      <h1>Movies App</h1>
+      {/* <h1>Movies App</h1> */}
       <Router>
         <Navigation />
         <CookieBanner />

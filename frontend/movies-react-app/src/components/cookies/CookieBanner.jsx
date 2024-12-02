@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../components/user/UserContext'; 
+import './Cookie.css';
 
 const CookieBanner = () => {
   const { cookiePreferences, updateCookiePreferences } = useContext(UserContext); 
