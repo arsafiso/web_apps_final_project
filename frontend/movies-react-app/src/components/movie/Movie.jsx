@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Movie.css';
+import fallbackImage from '../../assets/placeholder.jpg';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -105,11 +106,17 @@ const formatDuration = (seconds) => {
             <div className="genre-movies">
               {moviesByGenre[genre].map((movie) => (
                 <div key={movie._id} className="movie-card">
-                  <img
-                    src={movie.info.image_url || 'https://via.placeholder.com/200'}
-                    alt={movie.title}
-                    className="movie-image"
-                  />
+              <img
+                  src={movie.info.image_url}
+                  alt={movie.title || 'No title available'}
+                  className="movie-image"
+                  onError={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.target.onerror = null;
+                    e.target.src = fallbackImage;
+                  }}
+                />
                   <div className="movie-details">
                     <h3>{movie.title}</h3>
                     <p><strong>Rating:</strong> {movie.info.rating || 'N/A'}</p>
@@ -138,10 +145,13 @@ const formatDuration = (seconds) => {
           favorites.map((movie) => (
             <div key={movie._id} className="movie-card">
               <img
-                src={movie.info.image_url || 'https://via.placeholder.com/200'}
-                alt={movie.title}
-                className="movie-image"
-              />
+                  src={movie.info.image_url}
+                  alt={movie.title || 'No title available'}
+                  className="movie-image"
+                  onError={(e) => {
+                    e.target.src = fallbackImage;
+                  }}
+                />
               <div className="movie-details">
                 <h3>{movie.title}</h3>
                 <p><strong>Rating:</strong> {movie.info.rating || 'N/A'}</p>
