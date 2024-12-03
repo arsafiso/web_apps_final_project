@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import MovieRow from '../movie-row/MovieRow';
 
-const UserAccount = () => {
+const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -12,7 +13,6 @@ const UserAccount = () => {
           throw new Error('Failed to fetch profile');
         }
         const data = await res.json();
-      
         setProfile(data);
       } catch (err) {
         console.error('Error fetching profile:', err);
@@ -24,33 +24,20 @@ const UserAccount = () => {
     fetchProfile();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!profile) {
-    return <p>Failed to load profile. Please try again later.</p>;
-  }
+  if (loading) return <p>Loading...</p>;
+  if (!profile) return <p>Failed to load profile. Please try again later.</p>;
 
   const { firstName, lastName, favoriteMovies } = profile;
 
   return (
     <div className="user-account">
       <h1>Hello, {firstName} {lastName}</h1>
-      <h2>Your Favorite Movies</h2>
-      {favoriteMovies.length === 0 ? (
-        <p>You have no favorite movies yet.</p>
-      ) : (
-        <div className="movie-titles">
-          {favoriteMovies.map((movie) => (
-            <span key={movie._id} className="movie-title">
-              {movie.title}
-            </span>
-          ))}
-        </div>
-      )}
+      <MovieRow 
+        title="Your Favorite Movies"
+        movies={favoriteMovies}
+      />
     </div>
   );
 };
 
-export default UserAccount;
+export default Profile;

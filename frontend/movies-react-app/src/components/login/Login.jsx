@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../user/User';
 
@@ -12,10 +12,6 @@ const Login = () => {
     const [error, setError] = useState(null);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
-
-    useEffect(() => {
-        console.log('Username updated:', username);
-    }, [username]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
