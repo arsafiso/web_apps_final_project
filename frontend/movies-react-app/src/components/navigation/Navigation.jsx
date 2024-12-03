@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import netflixImage from '../../assets/netflix_logo.png';
 import './Navigation.css';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import  { useEffect, useState, useContext } from 'react';
 import './Movie.css';
 import UserContext from '../user/User';
 import MovieRow from '../movie-row/MovieRow';
@@ -46,7 +46,7 @@ const Movies = () => {
     if (username) {
       fetchFavorites();
     }
-  }, []);
+  }, [username]);
 
 
   const addToFavorites = async (movieId) => {
