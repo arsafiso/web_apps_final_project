@@ -12,7 +12,7 @@ const connectDB = async () => {
         const movies = await Movie.find();
         console.log('Connected to MongoDB');
         if (movies.length === 0) {
-            console.log("Inserting movies");
+            console.log("Initiating movies collection");
             await Movie.insertMany(moviesData);
         }
     } catch (err) {
