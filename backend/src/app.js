@@ -43,12 +43,15 @@ app.use("/api/users", userRoutes);
 
 
 const path = require("path");
+// Serve static files from the 'build' folder
 app.use(
-  express.static(path.join(__dirname, "../../frontend/movies-react-app/dist"))
+  express.static(path.join(__dirname, "../build"))
 );
+
+// Serve the index.html file for all other routes
 app.get("*", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "../../frontend/movies-react-app/dist/index.html")
+    path.join(__dirname, "../build/index.html")
   );
 });
 
