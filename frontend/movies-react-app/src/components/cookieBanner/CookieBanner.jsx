@@ -1,18 +1,18 @@
 import React, { useState, useContext } from 'react';
-import UserContext from '../../components/user/UserContext'; 
-import './Cookie.css';
+import UserContext from '../user/User'; 
+import './CookieBanner.css';
 
 const CookieBanner = () => {
-  const { cookiePreferences, updateCookiePreferences } = useContext(UserContext); 
+  const { cookiePreferences, setCookiePreferences } = useContext(UserContext);
   const [showBanner, setShowBanner] = useState(!cookiePreferences); 
 
   const handleAcceptCookies = () => {
-    updateCookiePreferences('accepted'); 
+    setCookiePreferences(true); 
     setShowBanner(false); 
   };
 
   const handleDeclineCookies = () => {
-    updateCookiePreferences('declined'); 
+    setCookiePreferences(false); 
     setShowBanner(false); 
   };
 

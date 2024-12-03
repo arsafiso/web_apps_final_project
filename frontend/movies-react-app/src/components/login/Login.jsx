@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserContext from '../user/User';
 
 const Login = () => {
+    const { setUsername, username } = useContext(UserContext);
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
     const [error, setError] = useState(null);
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log('Username updated:', username);
+    }, [username]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,9 +40,10 @@ const Login = () => {
             if (!response.ok) {
                 throw new Error(data.message || 'Login failed');
             }
-
+            setUsername(data.firstName);
             setMessage(data.message);
             setError(null);  // Clear any previous error
+            navigate('/'); // Redirect to the root path on success
         } catch (err) {
             setMessage('');
             setError(err.message || 'Login failed');

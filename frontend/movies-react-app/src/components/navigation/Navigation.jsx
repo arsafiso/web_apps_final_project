@@ -1,28 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import netflixImage from '../../assets/netflix_logo.png';
+import './Navigation.css';
+import UserContext from '../user/User'; 
+import { useNavigate } from 'react-router-dom';
 
 const base_url = 'http://localhost:3000/api';
 
 const Navigation = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    useEffect(() => {
-        // Check if the user is logged in by making a request to the backend
-        fetch(`${base_url}/users/check-session`, {
-            method: 'GET',
-            credentials: 'include', // This ensures cookies are sent with the request
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                if (data.loggedIn) {
-                    setIsLoggedIn(true);
-                }
-            })
-            .catch((error) => {
-                console.error('Error checking session:', error);
-            });
-    }, []);
+    const { username, setUsername, setCookiePreferences } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const handleLogout = async () => {
         // Log out the user by making a request to the backend to destroy the session
@@ -31,25 +18,35 @@ const Navigation = () => {
             credentials: 'include', // Include cookies to ensure session is cleared
         });
 
-        setIsLoggedIn(false);
+        setUsername(null);
+        setCookiePreferences(false);
+        navigate('/login'); 
     };
 
+    const navigateHome = () => { navigate('/'); }
+
     return (
-        <nav>
-            <ul>
-                {isLoggedIn ? (
+        <nav className="navbar">
+            <div className="logo-container" onClick={navigateHome}>
+                <img src={netflixImage} alt="Netflix Logo" className="logo" />
+            </div>
+            <ul className="nav-items">
+                {username ? (
                     <>
-                        <li>
-                            <button onClick={handleLogout}>Logout</button>
+                        <li className="nav-item">
+                            <Link to="/user" className="profile-button">Hello, {username}</Link>
+                        </li>
+                        <li className="nav-item">
+                            <button onClick={handleLogout} className="logout-button">Logout</button>
                         </li>
                     </>
                 ) : (
                     <>
-                        <li>
-                            <Link to="/register">Register</Link>
+                        <li className="nav-item">
+                            <Link to="/register" className="register-link">Register</Link>
                         </li>
-                        <li>
-                            <Link to="/login">Login</Link>
+                        <li className="nav-item">
+                            <Link to="/login" className="login-link">Login</Link>
                         </li>
                     </>
                 )}

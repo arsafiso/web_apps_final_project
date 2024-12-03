@@ -1,0 +1,55 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #141414;
+    padding: 10px 20px;
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    height: 50px;
+    cursor: pointer;
+}
+
+.nav-items {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+li.nav-item {
+    margin-left: 20px;
+}
+
+li.nav-item a { 
+    color: white;
+    text-decoration: none;
+    padding: 7.5px;
+    border-radius: 5px;
+}
+
+li.nav-item a.register-link {
+    background-color: white;
+    color: black;
+}
+
+.logout-button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.welcome-message {
+    color: white;
+    font-size: 16px;
+}

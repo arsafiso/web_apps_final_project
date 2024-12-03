@@ -1,10 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
-const authenticateToken = require('../middleware/authenticateToken');
+const Movie = require('../models/Movie');
 
 const router = express.Router();
-
 
 // Route to handle user registration
 router.post('/register', async (req, res) => {
@@ -59,7 +58,7 @@ router.post('/login', async (req, res) => {
         // Store user info in the session
         req.session.userId = user._id;  // Store user ID in the session
 
-        res.status(200).json({ message: 'User logged in successfully.' });
+        res.status(200).json({ message: 'User logged in successfully.', firstName: user.firstName });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error.' });
@@ -67,10 +66,10 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.post('/addFavorite', async (req, res) => {
-    const { movieTitle } = req.body;
+router.post('/favorites', async (req, res) => {
+    const { movieId } = req.body;
 
-    if (!movieTitle) {
+    if (!movieId) {
         return res.status(400).json({ message: 'Movie title is required.' });
     }
 
@@ -88,21 +87,41 @@ router.post('/addFavorite', async (req, res) => {
         }
 
         // Check if movie is already in favorites
-        if (user.favoriteMovies.includes(movieTitle)) {
+        if (user.favoriteMovies.includes(movieId)) {
             return res.status(400).json({ message: 'Movie is already in your favorites.' });
         }
 
         // Add the movie to favorites
-        user.favoriteMovies.push(movieTitle);
+        user.favoriteMovies.push(movieId);
         await user.save();
 
-        res.status(200).json({ message: 'Movie added to favorites successfully.' });
+        res.status(200).json({ favoriteMovies: 'Movie added to favorites successfully.' });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error.' });
     }
 });
 
+router.get('/favorites', async (req, res) => {
+    try {
+        // Check if user is logged in (session ID should be present)
+        if (!req.session.userId) {
+            return res.status(401).json({ message: 'You must be logged in get favorite movies.' });
+        }
+
+        // Find the user by session userId
+        const user = await User.findById(req.session.userId); 
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        res.status(200).json({ favoriteMovies: user.favoriteMovies });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error.' });
+    }
+});
 
 router.post('/logout', (req, res) => {
     if (!req.session.userId) {
@@ -121,28 +140,30 @@ router.post('/logout', (req, res) => {
     });
 });
 
-router.get('/check-session', (req, res) => {
-    console.log(req.session.userId);
-    if (req.session.userId) {
-        return res.json({ loggedIn: true });
-    } else {
-        return res.json({ loggedIn: false });
+router.get('/profile', async (req, res) => {
+    try {
+        // Check if user is logged in (session ID should be present)
+        if (!req.session.userId) {
+            return res.status(401).json({ message: 'You must be logged in to get favorite movies.' });
+        }
+
+        // Find the user by session userId
+        const user = await User.findById(req.session.userId); 
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        // Find movies whose IDs are in user's favoriteMovieIds array
+        const favoriteMovies = await Movie.find({
+            _id: { $in: user.favoriteMovies }
+        });
+
+        res.status(200).json({ favoriteMovies: favoriteMovies, firstName: user.firstName, lastName: user.lastName }); // Return the full movie objects
+    } catch (err) {
+        console.error('Error fetching favorite movies:', err);
+        res.status(500).json({ message: 'Server error.' });
     }
 });
-
-
-// Route to get user profile (requires authentication)
-// router.get('/profile', authenticateToken, async (req, res) => {
-//     try {
-//         const user = await User.findById(req.user.id).select('-password');
-//         if (!user) {
-//             return res.status(404).json({ message: 'User not found.' });
-//         }
-//         res.json(user);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ message: 'Server error.' });
-//     }
-// });
 
 module.exports = router;

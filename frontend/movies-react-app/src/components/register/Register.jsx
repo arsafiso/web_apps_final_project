@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Register = () => {
     });
     const [error, setError] = useState(null);
     const [message, setMessage] = useState('');
+    const navigate = useNavigate(); // Hook for navigation
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,6 +37,7 @@ const Register = () => {
 
             setMessage(data.message);
             setError(null);  // Clear any previous error
+            navigate('/login'); // Redirect to the root path on success
         } catch (err) {
             setMessage('');
             setError(err.message || 'Registration failed');
