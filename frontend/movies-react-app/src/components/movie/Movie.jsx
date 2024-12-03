@@ -1,7 +1,7 @@
-import  { useEffect, useState, useContext } from 'react';
-import './Movie.css';
-import UserContext from '../user/User';
+import { useContext, useEffect, useState } from 'react';
 import MovieRow from '../movie-row/MovieRow';
+import UserContext from '../user/User';
+import './Movie.css';
 
 
 const Movies = () => {

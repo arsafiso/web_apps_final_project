@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import UserContext from '../user/User'; 
+import { useContext, useState } from 'react';
+import UserContext from '../user/User';
 import './CookieBanner.css';
 
 const CookieBanner = () => {

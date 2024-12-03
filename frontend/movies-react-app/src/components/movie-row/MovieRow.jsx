@@ -1,5 +1,5 @@
 import fallbackImage from '../../assets/placeholder.jpg';
-import './MovieRow.css'
+import './MovieRow.css';
 
 const formatDuration = (seconds) => {
   const hours = Math.floor(seconds / 3600);

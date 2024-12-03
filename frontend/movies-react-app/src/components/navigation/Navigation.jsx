@@ -1,9 +1,8 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import netflixImage from '../../assets/netflix_logo.png';
+import UserContext from '../user/User';
 import './Navigation.css';
-import UserContext from '../user/User'; 
-import { useNavigate } from 'react-router-dom';
 
 const base_url = 'http://localhost:3000/api';
 

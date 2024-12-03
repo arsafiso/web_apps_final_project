@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import MovieRow from '../movie-row/MovieRow';
 
 const Profile = () => {
