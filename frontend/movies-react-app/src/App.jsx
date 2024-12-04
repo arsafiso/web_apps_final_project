@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'; // Updated imports
 import "./App.css";
 import CookieBanner from "./components/cookieBanner/CookieBanner";
-import Login from "./components/login/login";
+import SignIn from "./components/signIn/SignIn";
 import Movies from './components/movie/Movie';
 import Navigation from "./components/navigation/navigation";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -28,7 +28,7 @@ function App() {
             path="/login" 
             element={
               <PrivateRoute>
-                <Login />
+                <SignIn />
               </PrivateRoute>
             } 
           />

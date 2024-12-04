@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../user/User';
-import './Login.css';
+import './SignIn.css';
 
-const Login = () => {
+const SignIn = () => {
     const { setUsername } = useContext(UserContext);
 
     const [formData, setFormData] = useState({
@@ -82,4 +82,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignIn;
