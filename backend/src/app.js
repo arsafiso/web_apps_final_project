@@ -24,7 +24,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.use(session({
-  secret: process.env.SESSION_SECRET, 
+  secret: process.env.SESSION_SECRET || "abcd01234", 
   resave: false,  
   saveUninitialized: false,  
   cookie: {

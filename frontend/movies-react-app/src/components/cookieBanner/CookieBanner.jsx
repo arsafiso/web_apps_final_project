@@ -12,7 +12,6 @@ const CookieBanner = () => {
   };
 
   const handleDeclineCookies = () => {
-    setCookiePreferences(false); 
     setShowBanner(false); 
   };
 

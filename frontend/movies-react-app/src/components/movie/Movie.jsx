@@ -8,7 +8,7 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
-  const { username } = useContext(UserContext);
+  const { username, setUsername } = useContext(UserContext);
 
   const fetchMovies = async () => {
     try {
@@ -31,6 +31,11 @@ const Movies = () => {
 
       if (res.status === 200 && data.favoriteMovies) {
         setFavorites(data.favoriteMovies);
+      }
+      else if (res.status === 401) {
+        setUsername(null);
+        console.error('Authorization error:', data);
+        navigate('/login');
       } else {
         console.error('Failed to fetch favorites:', data);
       }
@@ -40,8 +45,6 @@ const Movies = () => {
   };
 
   useEffect(() => {
-
-  
     fetchMovies();
     if (username) {
       fetchFavorites();
@@ -61,6 +64,11 @@ const Movies = () => {
       const data = await res.json();
       if (res.status === 200) {
           setFavorites((prevFavorites) => [...prevFavorites, movieId]);
+      } 
+      else if (res.status === 401) {
+        setUsername(null);
+        console.error('Authorization error:', data);
+        navigate('/login');
       } else {
         console.error('Failed to add to favorites:', data);
       }

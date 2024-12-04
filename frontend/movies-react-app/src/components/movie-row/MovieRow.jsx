@@ -2,6 +2,10 @@ import fallbackImage from '../../assets/placeholder.jpg';
 import './MovieRow.css';
 
 const formatDuration = (seconds) => {
+  if (!seconds) {
+    return 'N/A';
+  }
+
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours ? `${hours}h ` : ''}${minutes}m`;
@@ -28,7 +32,7 @@ const MovieRow = ({ title, movies, addToFavorites, isFavorite, username }) => {
             <div className="movie-details">
               <h3>{movie.title}</h3>
               <p><strong>Rating:</strong> {movie.info.rating || 'N/A'}</p>
-              <p><strong>Duration:</strong> {formatDuration(movie.info.running_time_secs) || 'N/A'}</p>
+              <p><strong>Duration:</strong> {formatDuration(movie.info.running_time_secs)}</p>
               {username && addToFavorites && isFavorite && (
                 <button
                   onClick={() => addToFavorites(movie._id)}

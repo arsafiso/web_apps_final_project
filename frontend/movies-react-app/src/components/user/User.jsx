@@ -18,7 +18,7 @@ const UserProvider = ({ children }) => {
       setUsername: (newUsername) => {
         setUsername(newUsername);
         if (newUsername) {
-          Cookies.set('username', newUsername, { expires: 7 });
+          Cookies.set('username', newUsername, { expires: 1 });
         } else {
           Cookies.remove('username');
         }
@@ -26,12 +26,7 @@ const UserProvider = ({ children }) => {
       cookiePreferences, 
       setCookiePreferences: (newPreference) => {
         setCookiePreferences(newPreference);
-        if (newPreference) {
-          Cookies.set('cookiePreferences', newPreference)
-
-        } else {
-          Cookies.remove('cookiePreferences');
-        }
+        Cookies.set('cookiePreferences', newPreference, { expires: 1 })
       },
     }}>
       {children}
