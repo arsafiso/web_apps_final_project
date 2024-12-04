@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Register.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -45,11 +46,12 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="register-page">
+        <div className="register-container">
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>First Name:</label>
+                    <label>First Name</label>
                     <input
                         type="text"
                         name="firstName"
@@ -59,7 +61,7 @@ const Register = () => {
                     />
                 </div>
                 <div>
-                    <label>Last Name:</label>
+                    <label>Last Name</label>
                     <input
                         type="text"
                         name="lastName"
@@ -69,7 +71,7 @@ const Register = () => {
                     />
                 </div>
                 <div>
-                    <label>Email:</label>
+                    <label>Email</label>
                     <input
                         type="email"
                         name="email"
@@ -79,7 +81,7 @@ const Register = () => {
                     />
                 </div>
                 <div>
-                    <label>Password:</label>
+                    <label>Password</label>
                     <input
                         type="password"
                         name="password"
@@ -93,6 +95,7 @@ const Register = () => {
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {message && <p style={{ color: 'green' }}>{message}</p>}
+        </div>
         </div>
     );
 };

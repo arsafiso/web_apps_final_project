@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../user/User';
+import './Login.css';
 
 const Login = () => {
     const { setUsername } = useContext(UserContext);
@@ -47,11 +48,12 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className='login-page'>
+        <div className="login-container">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Email:</label>
+                    <label>Email</label>
                     <input
                         type="email"
                         name="email"
@@ -61,7 +63,7 @@ const Login = () => {
                     />
                 </div>
                 <div>
-                    <label>Password:</label>
+                    <label>Password</label>
                     <input
                         type="password"
                         name="password"
@@ -75,6 +77,7 @@ const Login = () => {
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {message && <p style={{ color: 'green' }}>{message}</p>}
+        </div>
         </div>
     );
 };

@@ -53,3 +53,22 @@ li.nav-item a.register-link {
     color: white;
     font-size: 16px;
 }
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .nav-items {
+        flex-direction: row;
+        align-items: flex-start;
+        padding-top: 10px;
+        gap: 10px;
+    }
+
+    .nav-item a {
+        font-size: 14px;
+    }
+}

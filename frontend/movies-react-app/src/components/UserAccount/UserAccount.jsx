@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import MovieRow from '../movie-row/MovieRow';
+import "./UserAccount.css"
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);

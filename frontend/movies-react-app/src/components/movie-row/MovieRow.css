@@ -90,15 +90,6 @@
     display: none; 
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-.movie-card {
-    width: 90%;
-    margin-bottom: 20px;
-}
-}
-
-/* Loader Styling */
 .loader-container {
     display: flex;
     justify-content: center;
@@ -123,4 +114,22 @@
 100% {
     transform: rotate(360deg);
 }
+}
+
+@media screen and (max-width: 768px) {
+    .movie-card {
+        width: 90%;
+    }
+
+    .genre-movies {
+        gap: 10px;
+    }
+
+    .movie-title {
+        font-size: 14px;
+    }
+
+    .movie-details p {
+        font-size: 10px;
+    }
 }
