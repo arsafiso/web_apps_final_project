@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../user/User';
 import './SignIn.css';
 
+const base_url = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:3000';
+
 const SignIn = () => {
     const { setUsername } = useContext(UserContext);
 
@@ -23,7 +25,7 @@ const SignIn = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3000/api/users/login', {
+            const response = await fetch(`${base_url}/api/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

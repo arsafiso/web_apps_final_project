@@ -4,7 +4,7 @@ import netflixImage from '../../assets/netflix_logo.png';
 import UserContext from '../user/User';
 import './Navigation.css';
 
-const base_url = 'http://localhost:3000/api';
+const base_url = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:3000';
 
 const Navigation = () => {
     const { username, setUsername, setCookiePreferences } = useContext(UserContext);
@@ -12,7 +12,7 @@ const Navigation = () => {
 
     const handleLogout = async () => {
         // Log out the user by making a request to the backend to destroy the session
-        await fetch(`${base_url}/users/logout`, {
+        await fetch(`${base_url}/api/users/logout`, {
             method: 'POST',
             credentials: 'include', // Include cookies to ensure session is cleared
         });

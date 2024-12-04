@@ -3,7 +3,8 @@ import MovieRow from '../movie-row/MovieRow';
 import UserContext from '../user/User';
 import './Movie.css';
 
-
+const base_url = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:3000';
+console.log(base_url);
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +13,7 @@ const Movies = () => {
 
   const fetchMovies = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/movies');
+      const res = await fetch(`${base_url}/api/movies`);
       const data = await res.json();
       setMovies(data);
     } catch (err) {
@@ -24,7 +25,7 @@ const Movies = () => {
 
   const fetchFavorites = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/users/favorites', {
+      const res = await fetch(`${base_url}/api/users/favorites`, {
         credentials: 'include',
       });
       const data = await res.json();
@@ -54,7 +55,7 @@ const Movies = () => {
 
   const addToFavorites = async (movieId) => {
     try {
-      const res = await fetch('http://localhost:3000/api/users/favorites', {
+      const res = await fetch(`${base_url}/api/users/favorites`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ movieId }),

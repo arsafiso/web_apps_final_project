@@ -4,6 +4,8 @@ import UserContext from '../user/User';
 import { useNavigate } from 'react-router-dom';
 import "./UserAccount.css"
 
+const base_url = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:3000';
+
 const UserAccount = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +15,7 @@ const UserAccount = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/users/profile', { credentials: 'include' });
+        const res = await fetch(`${base_url}/api/users/profile`, { credentials: 'include' });
         if (res.status === 401) {
           setUsername(null);
           console.error('Authorization error:', data);
