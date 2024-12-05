@@ -4,7 +4,7 @@ import UserContext from '../user/User';
 import { useNavigate } from 'react-router-dom';
 import "./UserAccount.css"
 
-const base_url = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:3000';
+const base_url = process.env.REACT_APP_API_URL || 'http://44.210.89.190:3000';
 
 const UserAccount = () => {
   const [profile, setProfile] = useState(null);

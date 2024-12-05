@@ -4,7 +4,7 @@ import netflixImage from '../../assets/netflix_logo.png';
 import UserContext from '../user/User';
 import './Navigation.css';
 
-const base_url = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:3000';
+const base_url = process.env.REACT_APP_API_URL || 'http://44.210.89.190:3000';
 
 const Navigation = () => {
     const { username, setUsername, setCookiePreferences } = useContext(UserContext);
