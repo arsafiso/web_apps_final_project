@@ -3,8 +3,8 @@ import MovieRow from '../movie-row/MovieRow';
 import UserContext from '../user/User';
 import './Movie.css';
 
-const base_url = process.env.REACT_APP_API_URL || 'http://44.210.89.190:3000';
-console.log(base_url);
+const base_url = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);

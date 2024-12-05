@@ -51,13 +51,13 @@ app.use("/api/users", userRoutes);
 const path = require("path");
 // Serve static files from the 'build' folder
 app.use(
-  express.static(path.join(__dirname, "../build"))
+  express.static(path.join(__dirname, "client/build"))
 );
 
 // Serve the index.html file for all other routes
 app.get("*", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "../build/index.html")
+    path.join(__dirname, "client/build/index.html")
   );
 });
 
