@@ -166,4 +166,35 @@ router.get('/profile', async (req, res) => {
     }
 });
 
+router.delete('/delete', async (req, res) => {
+    try {
+        // Check if user is logged in (session ID should be present)
+        if (!req.session.userId) {
+            return res.status(401).json({ message: 'You must be logged in to delete your account.' });
+        }
+
+        // Find the user by session userId
+        const user = await User.findById(req.session.userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        // Delete the user
+        await User.findByIdAndDelete(req.session.userId);
+
+        // Destroy the session
+        req.session.destroy(err => {
+            if (err) {
+                return res.status(500).json({ message: 'Failed to destroy session after account deletion.' });
+            }
+
+            res.status(200).json({ message: 'Account deleted successfully.' });
+        });
+    } catch (err) {
+        console.error('Error deleting account:', err);
+        res.status(500).json({ message: 'Server error.' });
+    }
+});
+
 module.exports = router;

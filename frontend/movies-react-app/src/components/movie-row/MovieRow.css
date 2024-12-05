@@ -107,6 +107,14 @@
     animation: spin 1s linear infinite;
 }
 
+.add-to-favorites-btn {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
 @keyframes spin {
 0% {
     transform: rotate(0deg);
